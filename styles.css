@@ -1,0 +1,1464 @@
+/* Estilos generales */
+body {
+  background-image: url('fondo.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #221515; /* Cambiar color de texto para mejor contraste */
+}
+
+/* Capa oscura semi-transparente para mejorar legibilidad del texto */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+/* Ajustar contenedor principal para que sea legible sobre el fondo */
+.container {
+  background-color: rgba(19, 8, 37, 0.9); /* Fondo semi-transparente */
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para la página de bienvenida y registro */
+.container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(19, 18, 18, 0.1);
+  text-align: center;
+  margin: 50px auto;
+  max-width: 500px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #10ac18;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  height: 40px;
+  width: px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+}
+/*iluminacion de boton Task in progres */
+button:hover {
+  background-color: #72ec9b;
+}
+
+p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para la página de revisión de tareas */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #16112e;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+  height: 50px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 1000;
+  color: #99e709;
+}
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+}
+
+.header-buttons button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: auto;
+  box-shadow: 0 0 10px #14dd40;
+}
+
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #2a1b5a;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  border-radius: 6px;
+  z-index: 100;
+  padding: 8px 0;
+  border: 1px solid #4a3b7a;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-content a, 
+.dropdown-content button {
+    color: #f0f0f0;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.dropdown-content a:hover, 
+.dropdown-content button:hover {
+    background-color: #3a2b6a;
+    color: #ffffff;
+    border-left: 3px solid #99e709;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.admin-only {
+  display: none;
+}
+
+.developer-only {
+  display: none;
+}
+
+/* Mostrar opciones de admin solo a admins */
+body.admin .admin-only {
+  display: block;
+}
+
+body.developer .developer-only {
+  display: block;
+}
+
+/* Estilos de la tabla */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0px;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  
+}
+
+table th {
+  background-color: #1c103a;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  
+}
+
+
+table td {
+  padding: 12px;
+  text-align: center;
+  position: relative;
+}
+
+
+table tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+/* Espaciado en columnas específicas */
+.wide-column {
+  width: 200px;
+}
+
+.claim-btn {
+  padding: 8px 16px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+  min-width: 100px;
+}
+
+/* Estilo base para el botón Claim */
+.claim-btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  min-width: 80px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Estado activo/normal */
+.claim-btn:not(:disabled) {
+  background-color: #3498db;
+  color: white;
+  
+  border: 1px solid #ced4da;
+}
+
+/* Hover para estado activo */
+.claim-btn:not(:disabled):hover {
+  background-color: #2980b9;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  
+
+}
+
+/* Estado deshabilitado por tarea incompleta */
+.claim-btn:disabled.incomplete {
+  background-color: #da7532;
+  color: #ffffff;
+  cursor: not-allowed;
+  border: 1px solid #dee2e6;
+}
+
+/* Estado deshabilitado por tarea reclamada */
+.claim-btn:disabled.claimed {
+  background-color: #e9ecef;
+  color: #495057;
+  cursor: not-allowed;
+  border: 1px solid #ced4da;
+}
+
+/* Modal */
+#modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+}
+
+#modal .modal-content {
+  background: linear-gradient(135deg, #1e0b36 0%, #2a1b5a 100%);
+  border: 1px solid #4a3b7a;
+  border-radius: 12px;
+  padding: 25px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  color: #f0f0f0;
+  position: relative;
+}
+
+#modal h2 {
+  color: #99e709;
+  margin-top: 0;
+  font-size: 22px;
+  text-align: center;
+  border-bottom: 1px solid #4a3b7a;
+  padding-bottom: 10px;
+}
+
+#modal p {
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+#modal p strong {
+  color: #99e709;
+}
+
+#modal .modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  gap: 10px;
+}
+
+#modal .modal-dropdown select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #4a3b7a;
+  background-color: #2a1b5a;
+  color: #f0f0f0;
+  margin: 10px 0;
+}
+
+#open-task-btn {
+  background-color: #3498db;
+  color: white;
+  width: 100%;
+}
+
+#finish-btn {
+  background-color: #27ae60;
+  color: white;
+  flex: 1;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #fff;
+}
+
+/* Estilos para el menú desplegable en el modal */
+.modal-dropdown {
+  margin: 15px 0;
+}
+
+.modal-dropdown select {
+  background-color: #1c103a;
+    color: #f0f0f0;
+    border: 1px solid #4a3b7a;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.modal-dropdown select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Estilos para la tabla de usuarios */
+#usersTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#usersTable th, #usersTable td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+#usersTable th {
+  background-color: #2c3e50;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+#usersTable tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+#usersTable button {
+  padding: 6px 12px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#usersTable button:hover {
+  background-color: #c0392b;
+}
+
+/* Estilos para la paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #2980b9;
+}
+
+.pagination button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* Estilos para la ventana emergente del Action History */
+/* Fondo debajo del modal */
+#historyModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.116);
+  justify-content: center;
+  align-items: center;
+}
+
+#historyModal .modal-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 1000px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#historyModal .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Encabezado Action History*/
+#historyModal h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #cdee13;
+}
+
+/*Estilo para tabla de Action Hystory*/
+#historyTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  
+}
+/*/*//* Estilo para la tabla de tareas *//**/
+#historyTable th, #historyTable td { 
+  border: 1px solid #fffffffa;
+  padding: 10px;
+  text-align: center;
+  background-color: #fdfdfd;
+  color: #050c13;
+  
+
+}
+/*encabezados de tabla */
+#historyTable th {
+  background-color: #b5da14;
+  color: #070707;
+  font-weight: 500;
+  border-radius: ;
+}
+
+#historyTable tbody tr:hover {
+  background-color: #f01111;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+
+}
+/*Boton Back Action History*/
+#backBtn { 
+  background-color: #3498db;
+  color: white;
+}
+
+#backBtn:hover {
+  background-color: #3bee62;
+}
+
+
+/* Estilos para los controles de paginación */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination-controls button {
+  padding: 8px 16px;
+  background-color: #2983be;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-controls button:hover {
+  background-color: #8ecaf3;
+}
+
+.pagination-controls button:disabled {
+  background-color: #506270;
+  cursor: not-allowed;
+}
+
+#pageInfo {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Estilos para el modal de carga de tareas */
+#loadTasksModal .modal-content {
+  max-width: 1500px;
+  border-radius: 15px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 1200px;
+  
+}
+
+#taskData {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: monospace;
+  white-space: pre;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button-group button {
+  padding: 5px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  flex: 1;
+  min-width: 120px;
+}
+
+.button-group button[type="submit"] {
+  background-color: #4CAF50;
+  color: rgb(255, 255, 255);
+}
+
+/* Botón Upload verde */
+#uploadTasksBtn {
+  background-color: #2ecc71 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border: 1px solid #27ae60;
+}
+
+/* Botón Cancel azul */
+#cancelLoadBtn {
+  background-color: #e63a1c !important;
+  box-shadow: 0 2px 4px rgba(26, 25, 25, 0.2);
+  border: 1px solid #2980b9;
+}
+
+
+/* Todos los botones con sombra y borde */
+.button-group button {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Estilos para el modal de gestión de usuarios */
+/* Modal de Manage Users */
+#manageUsersModal .modal-content {
+  background: linear-gradient(135deg, #130722 0%, #2a1b5a 100%);
+  border: 1px solid #8674c2;
+  border-radius: 12px;
+  padding: 25px;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 10px 25px rgba(99, 76, 76, 0.5);
+  color: #080808;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#usersTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background-color: #ffffff;
+  color: #ffffff;
+}
+
+#usersTable th {
+  background-color: #99e709;
+  color: #1c103a;
+  padding: 5px;
+  text-align: left;
+}
+
+#usersTable td {
+  padding: 12px;
+  border-bottom: 1px solid #ffffff;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+#usersTable tr:hover {
+  background-color: rgba(74, 59, 122, 0.3);
+}
+
+#usersTable select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #4a3b7a;
+  background-color: #2a1b5a;
+  color: #f0f0f0;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.toggle-user-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+  margin-right: 5px;
+}
+
+.toggle-user-btn.active {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.toggle-user-btn.inactive {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.delete-user-btn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.delete-user-btn:hover {
+  background-color: #c0392b;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#saveRolesBtn {
+  background-color: #3ac551;
+  color: white;
+  padding: 10px 20px;
+}
+
+
+#cancelManageUsersBtn {
+  background-color: #1333e4;
+  color: white;
+  padding: 10px 20px;
+}
+
+/* Estilos para el modal de historial personal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #1e0b36 0%, #2a1b5a 100%);
+  border: 1px solid #4a3b7a;
+  border-radius: 12px;
+  padding: 25px;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  color: #f0f0f0;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal h2 {
+  color: #99e709;
+  margin-top: 0;
+  font-size: 22px;
+  text-align: center;
+  border-bottom: 1px solid #4a3b7a;
+  padding-bottom: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #fff;
+}
+
+/* Estilos específicos para tablas en modales */
+.modal table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal th {
+  background-color: #99e709;
+  color: #1c103a;
+  padding: 12px;
+  text-align: left;
+}
+
+.modal td {
+  padding: 12px;
+  border-bottom: 1px solid #4a3b7a;
+}
+
+.modal tr:hover {
+  background-color: rgba(74, 59, 122, 0.3);
+}
+
+/* Estilos para botones en modales */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+/* Estilos para inputs en modales */
+.modal input, .modal select {
+  background-color: #2a1b5a;
+  color: #f0f0f0;
+  border: 1px solid #4a3b7a;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.modal input:focus, .modal select:focus {
+  outline: none;
+  border-color: #99e709;
+}
+ 
+
+
+/* Estilos para el modal de foto de perfil */
+#profileModal .modal-content {
+  width: 90%;
+  max-width: 500px;
+  height: 60%;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url('fondo_user_modal.jpg');
+}
+
+
+
+#profilePicInput {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+}
+
+/* Estilos para mostrar coordenadas */
+.show-coordinates .cell-coordinate {
+  display: block;
+}
+
+.cell-coordinate {
+  display: none;
+}
+
+/* Estilos para boton Instrucciones */
+.instructions-btn {
+  background-color: #d68d04;
+}
+
+
+
+
+
+/* Estilos para la vista previa de la hoja de cálculo */
+#sheetPreviewTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+#sheetPreviewTable th, #sheetPreviewTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  font-size: 12px;
+}
+
+#sheetPreviewTable th {
+  background-color: #050c13;
+  color: white;
+}
+
+#sheetPreviewTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.sheet-connected {
+  color: #2ecc71;
+}
+
+.sheet-disconnected {
+  color: #e74c3c;
+}
+
+/* Estilos para el modal de perfil */
+.profile-modal {
+  max-width: 400px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-header img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.profile-info h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.profile-info p {
+  margin: 5px 0 0;
+  color: #666;
+}
+
+.online-status {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.offline-status {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+/* Estilos para los badges de rol */
+.role-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.role-admin {
+  background-color: #e74c3c;
+  color: #faf7f7;
+  height: 20px;
+  width: 60px;
+}
+
+.role-L0 {
+  background-color: #3498db;
+  color: white;
+}
+
+.role-L10 {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.role-L12 {
+  background-color: #f39c12;
+  color: white;
+}
+
+.role-developer {
+  background-color: #9b59b6;
+  color: white;
+}
+
+/* Estilos para el botón de logout */
+#logoutBtn, #logoutBtnView {
+  background-color: #e74c3c;
+  color: white;
+  width: 100px;
+  
+}
+
+
+
+#logoutBtn:hover, #logoutBtnView:hover {
+  background-color: #c0392b;
+}
+
+/* Alineación izquierda para tabla y paginación */
+#tasksTable {
+  width: auto;
+  margin-left: 0;
+  float: left;
+}
+
+#tasksTable th, 
+#tasksTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+.pagination {
+  justify-content: flex-start;
+  margin-left: 0;
+  padding-left: 0;
+  clear: both;
+  float: left;
+}
+
+/* Contenedor principal */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Para dispositivos pequeños */
+@media (max-width: 768px) {
+  #tasksTable {
+    width: 100%;
+    float: none;
+  }
+  
+  .pagination {
+    width: 100%;
+  }
+}
+/* Estilos para la paginación */
+.pagination {
+  display: flex;
+  justify-content: flex-start; /* Cambiamos de center a flex-start */
+  margin-top: 20px;
+  clear: both; /* Aseguramos que esté debajo de la tabla */
+  float: left; /* Alineamos a la izquierda */
+  width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+/* Estilos para el contenedor principal */
+.container {
+  text-align: left; /* Alineamos todo el contenido a la izquierda */
+  max-width: 100%; /* Ocupa todo el ancho disponible */
+  max-height: 100%;
+  margin: 50px auto;
+  margin-top: 0px;
+  padding: 1px;
+  border-radius: 8px;
+  background-color: #130825;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para insignias de rol */
+.role-badge-img {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.role-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Estilos específicos para cada insignia */
+.role-admin-badge {
+  content: url('badge-admin.png');
+}
+
+.role-L0-badge {
+  content: url('badge-L0.png');
+}
+
+.role-L10-badge {
+  content: url('badge-L10.png');
+}
+
+.role-L12-badge {
+  content: url('badge-L12.png');
+}
+
+.role-developer-badge {
+  content: url('badge-developer.png');
+}
+
+.admin-only {
+    display: none;
+}
+body.admin .admin-only {
+    display: block;
+}
+
+/* Estilo Google Sheets */
+.online-users {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 20px;
+}
+
+.online-user {
+  position: relative;
+  cursor: pointer;
+  margin-right: -5px;
+  transition: transform 0.2s;
+}
+
+.online-user:hover {
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+.google-sheets-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.google-sheets-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.status-badge.admin { background-color: #ff3d00; }
+.status-badge.L10 { background-color: #00c853; }
+.status-badge.L12 { background-color: #ffab00; }
+.status-badge.developer { background-color: #6200ea; }
+
+/* Dropdown de más usuarios */
+.more-users-btn {
+  background: #f1f3f4;
+  color: #5f6368;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  border: 2px solid #fff;
+}
+
+.users-dropdown {
+  display: none;
+  position: absolute;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  padding: 8px;
+  z-index: 100;
+  right: 20px;
+  top: 60px;
+  min-width: 180px;
+}
+
+.user-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  gap: 8px;
+}
+
+.dropdown-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.user-dropdown-item:hover {
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+/* Estilo para el usuario actual */
+.current-user .google-sheets-avatar {
+  border: 2px solid #1a73e8;
+  box-shadow: 0 0 0 1px white;
+}
+
+.you-badge {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a73e8;
+  color: white;
+  font-size: 10px;
+  padding: 1px 4px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* Ajuste de espaciado */
+.online-user {
+  margin-right: 6px;
+  position: relative;
+}
+
+/* Dropdown mejorado */
+.users-dropdown {
+  max-height: 60vh;
+  overflow-y: auto;
+  width: 220px;
+}
+
+.dropdown-section-header {
+  color: #5f6368;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 16px 4px;
+  text-transform: uppercase;
+  background: #f8f9fa;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.user-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  gap: 12px;
+}
+
+.user-dropdown-item:hover {
+  background: #f1f3f4;
+}
+
+.user-dropdown-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.user-status {
+  font-size: 12px;
+  color: #5f6368;
+}
+
+.user-dropdown-item.connected .user-status {
+  color: #0b8043;
+}
+
+.user-dropdown-item.disconnected .user-status {
+  color: #d93025;
+}
+
+.dropdown-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.dropdown-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Interacción del botón "+" */
+.more-users-btn {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.more-users-btn:hover {
+  background: #e8f0fe;
+}
+
+/* ===== ESTILOS DEL MODAL ACTUALIZADO ===== */
+.profile-modal {
+    max-width: 350px;
+    text-align: center;
+    padding: 25px;
+}
+
+.avatar-upload-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.camera-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.camera-icon:hover {
+    background: #1a73e8;
+    transform: scale(1.1);
+}
+
+#profileModalPic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #1a73e8;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+.dm-button {
+    background: #1a73e8;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.logout-button {
+    background: #f44336;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Iconos de Font Awesome */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Plum Geminis LL Reviewer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Plum Geminis LL Reviewer</h1>
+    <form id="registerForm">
+      <h2>Registro de Usuario</h2>
+      <div class="form-group">
+        <label for="newUsername">Usuario:</label>
+        <input type="text" id="newUsername" name="newUsername" required>
+      </div>
+      <div class="form-group">
+        <label for="newPassword">Contraseña:</label>
+        <input type="password" id="newPassword" name="newPassword" required>
+      </div>
+      <div class="form-group">
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+          <option value="admin">Admin</option>
+          <option value="L0">L0</option>
+          <option value="L10">L10</option>
+          <option value="L12">L12</option>
+          <option value="developer">Developer</option>
+        </select>
+      </div>
+      <button type="submit">Registrarse</button>
+      <p>¿Ya tienes una cuenta? <a href="index.html">Inicia sesión aquí</a></p>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

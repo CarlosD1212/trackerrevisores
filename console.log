@@ -1,0 +1,74 @@
+// Función para obtener datos de Google Sheets
+async function getDataFromGoogleSheets() {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("Datos recibidos:", data.values); // Verificar los datos recibidos
+    return data.values;
+  } catch (error) {
+    console.error("Error al obtener datos:", error);
+    return [];
+  }
+}
+
+// Función para renderizar las tareas en la tabla
+async function renderTasks() {
+  const data = await getDataFromGoogleSheets(); // Obtener datos
+  console.log("Datos procesados:", data); // Verificar los datos procesados
+
+  tbody.innerHTML = ""; // Limpiar la tabla antes de renderizar
+
+  if (!data || data.length === 0) {
+    tbody.innerHTML = "<tr><td colspan='21'>No hay datos disponibles</td></tr>";
+    return;
+  }
+
+  data.forEach((row, index) => {
+    if (index === 0) return; // Saltar la primera fila (encabezados)
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${row[0] || ""}</td>
+      <td class="wide-column">${row[1] || ""}</td>
+      <td>${row[2] || ""}</td>
+      <td>${row[3] || ""}</td>
+      <td><button class="claim-btn" data-index="${index}" data-subtask="subtask1">Claim</button></td>
+      <td class="reviewer-column">${row[4] || ""}</td>
+      <td class="wide-column">${row[5] || ""}</td>
+      <td>${row[6] || ""}</td>
+      <td>${row[7] || ""}</td>
+      <td><button class="claim-btn" data-index="${index}" data-subtask="subtask2">Claim</button></td>
+      <td class="reviewer-column">${row[8] || ""}</td>
+      <td class="wide-column">${row[9] || ""}</td>
+      <td>${row[10] || ""}</td>
+      <td>${row[11] || ""}</td>
+      <td><button class="claim-btn" data-index="${index}" data-subtask="subtask3">Claim</button></td>
+      <td class="reviewer-column">${row[12] || ""}</td>
+      <td class="wide-column">${row[13] || ""}</td>
+      <td>${row[14] || ""}</td>
+      <td>${row[15] || ""}</td>
+      <td><button class="claim-btn" data-index="${index}" data-subtask="subtask4">Claim</button></td>
+      <td class="reviewer-column">${row[16] || ""}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Agregar eventos a los botones "Claim"
+  document.querySelectorAll(".claim-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      const index = button.getAttribute("data-index");
+      const subtaskKey = button.getAttribute("data-subtask");
+      const task = data[index];
+
+      // Obtener los detalles de la tarea
+      const subtask = task[1]; // Subtask 1
+      const reviewLevel = task[2]; // Review Level 1
+      const status = task[3]; // Status 1
+
+      // Abrir el modal con los detalles
+      openModal(subtask, reviewLevel, status);
+    });
+  });
+}
+
+// Renderizar las tareas al cargar la página
+renderTasks();

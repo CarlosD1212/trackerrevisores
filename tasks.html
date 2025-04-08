@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plum Geminis LL Reviewer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    .cell-coordinate {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      font-size: 10px;
+      color: #666;
+      pointer-events: none;
+    }
+    td {
+      position: relative;
+    }
+    .header-buttons a {
+      text-decoration: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-left: 10px;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-left: 10px;
+      cursor: pointer;
+      border: 2px solid #ffeb3b;
+      transition: border-color 0.3s;
+    }
+    .online-users {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+    }
+    .online-user {
+      position: relative;
+      margin-right: 5px;
+    }
+    .more-users {
+      background: #3498db;
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .users-dropdown {
+      position: absolute;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      right: 0;
+      top: 50px;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      display: none;
+    }
+    .users-dropdown.show {
+      display: block;
+    }
+    .users-dropdown img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 5px;
+      border: 2px solid #ffeb3b;
+    }
+    .users-dropdown div {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+    }
+    .role-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+    .role-admin {
+      background-color: #e74c3c;
+      color: white;
+    }
+    .role-L0 {
+      background-color: #3498db;
+      color: white;
+    }
+    .role-L10 {
+      background-color: #2ecc71;
+      color: white;
+    }
+    .role-L12 {
+      background-color: #f39c12;
+      color: white;
+    }
+    .role-developer {
+      background-color: #9b59b6;
+      color: white;
+    }
+    .profile-modal {
+      max-width: 400px;
+    }
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .profile-header img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 20px;
+      border: 2px solid #ffeb3b;
+    }
+    .profile-info h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .profile-info p {
+      margin: 5px 0 0;
+      color: #666;
+    }
+    .sheet-connection {
+      display: flex;
+      align-items: center;
+    }
+    
+    .sheet-connection input {
+      flex: 1;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      margin-right: 10px;
+      width: 900px;
+    }
+    .sheet-connected {
+      color: #2ecc71;
+      font-weight: bold;
+    }
+    .sheet-disconnected {
+      color: #df3030;
+      font-weight: bold;
+      
+    }
+    
+        .role-img {
+        width: 24px;
+        height: 24px;
+        vertical-align: middle;
+        margin-left: 5px;
+    }
+    
+    .role-selector {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 5px;
+    }
+    
+    .role-option {
+        display: flex;
+        align-items: center;
+        padding: 3px 8px;
+        background: #f0f0f0;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+    
+    .role-option.selected {
+        background: #3498db;
+        color: white;
+    }
+    
+    .role-option img {
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+    }
+
+    /* Estilo para el botón del menú principal */
+#menuBtn, #adminsBtn {
+    background-color: #1c103a;
+    border: 1px solid #4a3b7a;
+    color: #99e709;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#menuBtn:hover, #adminsBtn:hover {
+    background-color: #2a1b5a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Estilo para el botón activo */
+#menuBtn.active, #adminsBtn.active {
+    background-color: #99e709;
+    color: #1c103a;
+}
+
+/* Separador en el menú */
+.dropdown-content .divider {
+    height: 1px;
+    background-color: #4a3b7a;
+    margin: 5px 0;
+}
+
+#clearAllHistoryBtn {
+    background-color: #b63729;
+    color: white;
+}
+
+#clearAllHistoryBtn:hover {
+    background-color: #fc311a;
+}
+    .instructions-btn {
+      background-color: #d3a424;
+      box-shadow: 0 0 10px #d3a424;
+      border: 1px solid rgba(0,0,0,0.1);
+      
+    }
+    
+    .ranking-container {
+      background-image: url('fondo_ranking2.jpg');
+      margin-top: 30px;
+      background-color: #130d2e;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .ranking-title {
+      font-size: 30px;
+      margin-bottom: 15px;
+      color: #99e709;  
+      text-align: center;
+      margin-top: 0;
+    }
+    
+    .ranking-list {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .ranking-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 120px;
+    }
+    
+    .ranking-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ffeb3b;
+      margin-bottom: 8px;
+      
+    }
+    
+    .ranking-name {
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 5px;
+      color: #ffeb3b;
+      
+    }
+    
+    .ranking-score {
+      font-weight: bold;
+      color: #2ecc71;
+    }
+    
+    /* Update the Load Tasks modal width */
+    #loadTasksModal .modal-content {
+      max-width: 1600px;
+      width: 100%;
+    }
+    
+    /* Update dropdown background */
+    .dropdown-content {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <img src="logo.png" alt="Logo" class="logo">
+    <h1>bmw_gemini_ll</h1>
+    
+    <div class="header-buttons">
+      <div class="dropdown">
+        <button id="menuBtn">Menu</button>
+        <div class="dropdown-content">
+          <button id="toggleCoordinatesBtn">Toggle Coordinates</button>
+          <button id="personalHistoryBtn">My History</button>
+          <button id="clearAllHistoryBtn" class="admin-only">Clear All History</button>
+        </div>
+      </div>
+      
+      <div class="dropdown admin-only">
+        <button id="adminsBtn">Admins</button>
+        <div class="dropdown-content">
+          <a href="#" id="manageUsersLink">Manage Users</a>
+          <a href="#" id="registerLink">Register User</a>
+          <a href="#" id="reportLink">History</a>
+          <a href="#" id="loadTasksLink">Load Tasks</a>
+        </div>
+      </div>
+      
+      <button id="taskInProgressBtn" class="task-progress-btn">Task in Progress</button>
+      <a href="https://sites.google.com/view/jackrrabit2025/pagina-principal" target="_blank" id="instructionsBtn" class="instructions-btn">Instructions</a>
+      <div class="online-users" id="onlineUsersContainer">
+        <!-- Online users will be added here -->
+      </div>
+      <img id="profilePic" class="profile-pic" src="default-profile.png" alt="Profile">
+    </div>
+  </header>
+
+  <div class="ranking-container">
+    <h2 class="ranking-title">Top 5 Reviewers</h2>
+    <div class="ranking-list" id="rankingList">
+      <!-- Ranking will be populated by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Tasks Table -->
+    <table id="tasksTable">
+      <thead>
+        <tr>
+          <th class="wide-column">Subtask 1</th>
+          <th>Review Level</th>
+          <th>Status</th>
+          <th>Action</th>
+          <th class="wide-column">Subtask 2</th>
+          <th>Review Level</th>
+          <th>Status</th>
+          <th>Action</th>
+          <th class="wide-column">Subtask 3</th>
+          <th>Review Level</th>
+          <th>Status</th>
+          <th>Action</th>
+          <th class="wide-column">Subtask 4</th>
+          <th>Review Level</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dynamic rows will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Task Details Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Task Details</h2>
+      <p><strong>Subtask:</strong> <span id="modal-subtask"></span></p>
+      <p><strong>Review Level:</strong> <span id="modal-review-level"></span></p>
+      <p><strong>Status:</strong> <span id="modal-status"></span></p>
+
+      <div>
+        <button id="open-task-btn">Open Task</button>
+      </div>
+
+      <div class="modal-dropdown">
+        <select id="modal-action">
+          <option value="" disabled selected>Select action</option>
+          <option value="reject">Reject</option>
+          <option value="accepted">Accepted</option>
+        </select>
+      </div>
+
+      <div class="modal-buttons">
+        <button id="finish-btn" disabled>Finish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- History Modal -->
+  <div id="historyModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Action History</h2>
+      
+      <div class="filters">
+        <select id="filterAction">
+          <option value="">All actions</option>
+          <option value="reject">Reject</option>
+          <option value="accepted">Accepted</option>
+        </select>
+        <input type="text" id="filterReviewer" placeholder="Filter by reviewer">
+        <input type="date" id="filterDate">
+        <input type="text" id="filterSubtask" placeholder="Filter by subtask">
+        <button id="applyFilters">Apply Filters</button>
+      </div>
+      
+      <table id="historyTable">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Subtask</th>
+            <th>Reviewer</th>
+            <th>Date and Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dynamic rows will be inserted here -->
+        </tbody>
+      </table>
+      
+      <div class="pagination-controls">
+        <button id="prevPageBtn">Previous</button>
+        <span id="pageInfo">Page 1 of 1</span>
+        <button id="nextPageBtn">Next</button>
+      </div>
+      
+      <div class="modal-buttons">
+        <button id="backBtn">Back</button>
+        <button id="clearHistoryBtn" class="admin-only">Limpiar Historial</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Personal History Modal -->
+  <div id="personalHistoryModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>My Task History</h2>
+      
+      <table id="personalHistoryTable">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Subtask</th>
+            <th>Date and Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dynamic rows will be inserted here -->
+        </tbody>
+      </table>
+      
+      <div class="modal-buttons">
+        <button id="closePersonalHistoryBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Tasks Modal -->
+  <div id="loadTasksModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Load Tasks</h2>
+      
+      <div class="sheet-connection">
+        <input type="text" id="sheetUrl" placeholder="Google Sheet URL" value="https://docs.google.com/spreadsheets/d/1XVrPvVAv3dR8Vm9f6md1scurnIS2SrkpwYgIzh2xfPk/edit">
+        <button id="connectSheetBtn">Connect</button>
+        <span id="connectionStatus" class="sheet-disconnected">Disconnected</span>
+      </div>
+      
+      <div class="table-container">
+        <table id="sheetPreviewTable">
+          <thead>
+            <tr>
+              <th>Subtask 1</th>
+              <th>Review Level</th>
+              <th>Status</th>
+              <th>Action</th>
+              <th>Subtask 2</th>
+              <th>Review Level</th>
+              <th>Status</th>
+              <th>Action</th>
+              <th>Subtask 3</th>
+              <th>Review Level</th>
+              <th>Status</th>
+              <th>Action</th>
+              <th>Subtask 4</th>
+              <th>Review Level</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Sheet data will be loaded here -->
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- In the Load Tasks Modal button group -->
+<div class="button-group">
+  <button type="button" id="removeReviewLevelBtn">Remove Review Level -1</button>
+  <button type="button" id="removeReviewLevel0Btn">Remove Review Level 0</button>
+  <button type="button" id="removeDuplicatesBtn">Remove Review Level 10</button>
+  <button type="button" id="removeReviewLevel11Btn">Remove Review Level 11</button>
+  <button type="button" id="removeReviewLevel12Btn">Remove Review Level 12</button>
+  <button type="button" id="removeQuarantinedBtn">Remove Quarantined</button>
+  <button type="button" id="removeCompletedBtn">Remove Completed</button>
+  <button type="button" id="uploadTasksBtn">Upload Tasks</button>
+  <button type="button" id="cancelLoadBtn">Cancel</button>
+</div>
+    </div>
+  </div>
+
+  <!-- Manage Users Modal -->
+  <div id="manageUsersModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Manage Users</h2>
+      
+      <table id="usersTable">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Current Roles</th>
+            <th>Assign Roles</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dynamic rows will be inserted here -->
+        </tbody>
+      </table>
+      
+      <div class="modal-buttons">
+        <button id="saveRolesBtn">Save Changes</button>
+        <button id="cancelManageUsersBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+
+  
+  <div id="profileModal" class="modal">
+    <div class="modal-content profile-modal">
+      <span class="close">&times;</span>
+      
+      <div class="profile-header">
+        <img id="profileModalPic" src="default-profile.png" alt="Profile">
+        <div class="profile-info">
+          <h3 id="profileUsername">Username</h3>
+          <p id="profileRole" class="role-badge">Role</p>
+          <p id="profileStatus">Status: <span class="online-status">Online</span></p>
+        </div>
+      </div>
+      
+      
+      
+      <div id="profileEditSection" style="display: none;">
+        <div class="form-group">
+          <label for="profilePicInput">Change Profile Picture:</label>
+          <input type="file" id="profilePicInput" accept="image/*">
+        </div>
+        
+        <div class="image-preview">
+          <img id="profilePicPreview" src="default-profile.png" alt="Preview" style="max-width: 200px; max-height: 200px;">
+        </div>
+        
+        <div class="modal-buttons">
+          <button id="saveProfilePicBtn">Save Changes</button>
+          <button id="cancelProfilePicBtn">Cancel</button>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div>
+      
+      <div id="profileViewSection" class="modal-buttons">
+        <button id="editProfileBtn">Edit Profile</button>
+        <button id="logoutBtnView">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
